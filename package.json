@@ -1,0 +1,25 @@
+{
+  "name": "coin-collection-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./server/server.js",
+    "dev": "node --watch ./server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/behzod1205/coin-collection-manager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/behzod1205/coin-collection-manager/issues"
+  },
+  "homepage": "https://github.com/behzod1205/coin-collection-manager#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
+  }
+}
