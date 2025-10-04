@@ -23,7 +23,7 @@ export default class BaseController{
                 const data = req.body
     
                 const result = await Update(id, data, this.table, this.idColumn)
-                if (!result) return res.status(404).json({ message: `${this.table}not found`})
+                if (!result) return res.status(404).json({ message: `${this.table.slice(0, -1)} not found`})
     
                 res.status(200).json(result)
             }catch(err){
@@ -36,9 +36,9 @@ export default class BaseController{
                 const { id } = req.params
     
                 const result = await Delete(id, this.table, this.idColumn)
-                if (!result) return res.status(404).json({ message: `${this.table} Not Found`})
+                if (!result) return res.status(404).json({ message: `${this.table.slice(0, -1)} not found`})
                 
-                res.status(200).json({message: "Player Deleted Successfully", Player: result})
+                res.status(200).json({message: `${this.table.slice(0, -1)} deleted duccessfully`, data: result})
             }catch(err){
                 next(err)
             }
@@ -49,7 +49,7 @@ export default class BaseController{
                 const { id } = req.params
     
                 const result = await getOne(id, this.table)
-                if (!result) return res.status(404).json({ message: `${this.table} Not Found`})
+                if (!result) return res.status(404).json({ message: `${this.table.slice(0, -1)} not found`})
                 
                 res.status(200).json(result)
             }catch(err){
@@ -59,7 +59,7 @@ export default class BaseController{
     GetAll = async(req, res, next)=>{
             try{
                 const result = await getAll(this.table)
-                if (!result) return res.status(404).json({ message: `${this.table} Not Found`})
+                if (!result) return res.status(404).json({ message: `${this.table.slice(0, -1)} not found`})
                 
                 res.status(200).json(result)
             }catch(err){
