@@ -2,9 +2,9 @@ import { Create, Update, Delete, getOne, getAll} from "../helpers/CRUD.js"
 
 
 export default class BaseController{
-    constructor(table, idColumn = "id"){
+    constructor(table, tableColumn = "id"){
         this.table = table,
-        this.idColumn = idColumn
+        this.tableColumn = tableColumn
     }
 
     create = async (req, res, next)=>{
@@ -22,7 +22,7 @@ export default class BaseController{
                 const { id } = req.params
                 const data = req.body
     
-                const result = await Update(id, data, this.table, this.idColumn)
+                const result = await Update(id, data, this.table, this.tableColumn)
                 if (!result) return res.status(404).json({ message: `${this.table.slice(0, -1)} not found`})
     
                 res.status(200).json(result)
@@ -35,7 +35,7 @@ export default class BaseController{
             try{
                 const { id } = req.params
     
-                const result = await Delete(id, this.table, this.idColumn)
+                const result = await Delete(id, this.table, this.tableColumn)
                 if (!result) return res.status(404).json({ message: `${this.table.slice(0, -1)} not found`})
                 
                 res.status(200).json({message: `${this.table.slice(0, -1)} deleted duccessfully`, data: result})

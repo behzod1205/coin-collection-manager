@@ -3,16 +3,17 @@ import { checkLogin } from "../middleware/checkLogin.middleware.js";
 import userController from "../controller/users.controller.js";
 
 const UserRouter = Router()
+const users = new userController()
 
-UserRouter.post("/register", userController.create)
-UserRouter.post("/login", checkLogin, userController.loginCheck)
+UserRouter.post("/register", users.create)
+UserRouter.post("/login", checkLogin, users.loginCheck)
 
 UserRouter.use(checkLogin)
 
-UserRouter.get("/", userController.GetAll)
-UserRouter.get("/:id", userController.GetOne)
-UserRouter.patch("/:id", userController.update)
-UserRouter.delete("/:id", userController.delete)
-UserRouter.post("/logout", userController.logOut)
+UserRouter.get("/", users.GetAll)
+UserRouter.get("/:id", users.GetOne)
+UserRouter.patch("/:id", users.update)
+UserRouter.delete("/:id", users.delete)
+UserRouter.post("/logout", users.logOut)
 
 export default UserRouter
