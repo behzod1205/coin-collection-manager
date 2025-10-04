@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { checkLogin } from "../middleware/checkLogin.middleware";
-import userController from "../controller/users.controller";
+import { checkLogin } from "../middleware/checkLogin.middleware.js";
+import userController from "../controller/users.controller.js";
 
 const UserRouter = Router()
 
@@ -11,7 +11,8 @@ UserRouter.use(checkLogin)
 
 UserRouter.get("/", userController.GetAll)
 UserRouter.get("/:id", userController.GetOne)
-UserRouter.put("/:id", userController.update)
+UserRouter.patch("/:id", userController.update)
 UserRouter.delete("/:id", userController.delete)
+UserRouter.post("/logout", userController.logOut)
 
 export default UserRouter
