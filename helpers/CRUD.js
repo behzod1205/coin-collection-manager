@@ -23,7 +23,7 @@ async function Create(data, table) {
 
 
 
-async function Update(id, data, table, idColumn = "id") {
+async function Update(id, data, table, tableColumn = "id") {
     try{
         const keys = Object.keys(data)
         if (keys.length === 0) return null
@@ -37,7 +37,7 @@ async function Update(id, data, table, idColumn = "id") {
         const query = `
         UPDATE ${table}
         SET  ${temp} 
-        WHERE ${idColumn} = $${values.length} 
+        WHERE ${tableColumn} = $${values.length} 
         RETURNING *;`
 
         const res = await pool.query(query, values)
@@ -49,12 +49,12 @@ async function Update(id, data, table, idColumn = "id") {
     }
 }
 
-async function Delete(id, table, idColumn = "id") {
+async function Delete(id, table, tableColumn = "id") {
     const query = `
     DELETE FROM 
     ${table} 
     WHERE 
-    ${idColumn} = $1 
+    ${tableColumn} = $1 
     RETURNING *;`
 
         try{
@@ -70,14 +70,14 @@ async function Delete(id, table, idColumn = "id") {
         }
 }
 
-async function getOne(id, table){
+async function getOne(value, table, tableColumn = "id"){
     try{
         const query = `
         SELECT *
         FROM ${table} 
-        WHERE id = $1;`
+        WHERE ${tableColumn} = $1;`
 
-        const res = await pool.query(query, [id])
+        const res = await pool.query(query, [value])
         return res.rows[0]
     }catch(err){
         console.error("Error: ", err)
