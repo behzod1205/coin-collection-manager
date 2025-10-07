@@ -1,14 +1,17 @@
 import { Router } from "express";
-import { collectionController } from "../controller/collections.controller.js";
-import { checkLogin } from "../middleware/checkLogin.middleware.js";
 
-const collectionRouter = Router()
-const collections = new collectionController()
+import {findAll, findOne, createOne, updateOne, deleteOne} from "../controller/collections.controller.js"
 
-collectionRouter.get("/", collections.GetAll)
-collectionRouter.get("/:id", collections.GetOne)
-collectionRouter.post("/", checkLogin, collections.create)
-collectionRouter.patch("/:id", checkLogin, collections.update)
-collectionRouter.delete("/:id", checkLogin, collections.delete)
 
-export default collectionRouter
+const collectionsRouter = Router()
+
+
+
+collectionsRouter.get("/", findAll)
+collectionsRouter.get("/:id", findOne)
+collectionsRouter.post("/", createOne)
+collectionsRouter.put("/:id", updateOne)
+collectionsRouter.delete("/:id", deleteOne)
+
+
+export default collectionsRouter
